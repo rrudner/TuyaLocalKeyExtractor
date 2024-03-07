@@ -1,5 +1,6 @@
 import glob
 import re
+import html
 
 def find_xml_file():
     try:
@@ -24,6 +25,7 @@ def read_xml_content(file_path):
         # Open the XML file and read its content
         with open(file_path, "r", encoding="utf-8") as file:
             return file.read()
+
     except FileNotFoundError as e:
         # Handle FileNotFoundError and exit the program
         print(f"Error: {e}")
@@ -56,7 +58,7 @@ def print_data(matches):
             if local_key:
                 print(f"Friendly Name: {matches[i + 1][0]}")
                 print(f"Device ID: {matches[i - 1][1]}")
-                print(f"Local Key: {local_key}")
+                print(f"Local Key: {html.unescape(local_key)}")
                 print("------------------------------")
     except IndexError as e:
         # Handle IndexError and exit the program
